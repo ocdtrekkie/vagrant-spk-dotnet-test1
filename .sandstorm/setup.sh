@@ -5,19 +5,13 @@
 
 set -euo pipefail
 
-wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
-sudo mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
-wget -q https://packages.microsoft.com/config/debian/9/prod.list
-sudo mv prod.list /etc/apt/sources.list.d/microsoft-prod.list
-sudo chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
-sudo chown root:root /etc/apt/sources.list.d/microsoft-prod.list
+download_url='https://download.visualstudio.microsoft.com/download/pr/c58adb8a-49cf-466c-9b72-e4c51edae0e5/f915b953a5bfdafc300bd277d80c3513/dotnet-sdk-5.0.100-preview.8.20417.9-linux-x64.tar.gz'
 
-sudo apt-get update
-sudo apt-get install -y apt-transport-https
-sudo apt-get update
-sudo apt-get install -y dotnet-sdk-3.1 aspnetcore-runtime-3.1 dotnet-runtime-3.1
+wget "$download_url" -O dotnet.tar.gz
+mkdir /usr/local/dotnet
+tar -C /usr/local/dotnet -xvf dotnet.tar.gz
 
 sudo mkdir /fake
-sudo ln -s /usr/bin/dotnet /fake/proc-self-exe
+sudo ln -s /usr/local/dotnet/dotnet /fake/proc-self-exe
 
 exit 0

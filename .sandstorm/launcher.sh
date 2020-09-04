@@ -30,6 +30,8 @@ set -euo pipefail
 # appropriate for your application.
 cd /opt/app/myWebApp
 
+export DOTNET_ROOT=/usr/local/dotnet
+export PATH="$PATH:$DOTNET_ROOT"
 export COREHOST_TRACE=1
 dotnet --info
 dotnet run

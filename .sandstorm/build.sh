@@ -21,6 +21,9 @@ set -euo pipefail
 # appropriate for your application.
 cd /opt/app
 
+export DOTNET_ROOT=/usr/local/dotnet
+export PATH="$PATH:$DOTNET_ROOT"
+
 dotnet new webApp -o myWebApp --no-https --force
 
 exit 0
